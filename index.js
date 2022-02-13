@@ -16,7 +16,7 @@ const pages = require('./routes/pages')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
-const mongo = process.env.MONGODB || 'mongodb://localhost/noticias2'
+const mongo = process.env.MONGODB || 'mongodb://localhost/noticias'
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
