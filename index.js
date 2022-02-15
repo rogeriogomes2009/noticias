@@ -28,11 +28,9 @@ app.use(express.static('public'))
 
 app.use('/', auth)
 app.use('/', pages)
+app.use('/admin', admin)
 app.use('/restrito', restrito)
 app.use('/noticias', noticias)
-app.use('/admin', admin)
-
-
 
 const createInicialUser = async () => {
   const total = await User.count({})

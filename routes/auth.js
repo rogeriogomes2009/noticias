@@ -17,7 +17,7 @@ passport.deserializeUser((user, done) => {
 
 //definindo estrategia para login local
 passport.use(new LocalStrategy(async(username, password, done) => {
-  const user = await User.findOne( { username })
+  const user = await User.findOne({ username })
   if(user){
     const isValid = await user.checkPassword(password)
     if(isValid){
@@ -63,6 +63,6 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: false
-}) )
+}))
 
 module.exports = router
