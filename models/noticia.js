@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const NoticiaSchema = new mongoose.Schema({
-  Title: String,
+  title: String,
   content: String,
   category: String 
 })

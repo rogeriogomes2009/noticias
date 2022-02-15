@@ -12,6 +12,7 @@ const noticias = require('./routes/noticias')
 const restrito = require('./routes/restrito')
 const auth = require('./routes/auth')
 const pages = require('./routes/pages')
+const admin = require('./routes/admin')
 
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -25,33 +26,31 @@ app.use(session({ secret: 'fullstack-master' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
-app.use((req, res, next) => {
-  if('user' in req.session){
-    res.locals.user = req.session.user
-  }
-  next()
-})
-
-app.use('/restrito', (req, res, next) => {
-  if('user' in req.session){
-    return next()
-  }
-  res.redirect('/login')
-})
-app.use('/restrito', restrito)
-app.use('/noticias', noticias)
-
 app.use('/', auth)
 app.use('/', pages)
+app.use('/restrito', restrito)
+app.use('/noticias', noticias)
+app.use('/admin', admin)
+
+
 
 const createInicialUser = async () => {
-  const total = await User.count({ username: 'rogeriogomes' })
+  const total = await User.count({})
   if(total ===0){
     const user = new User({
       username: 'rogeriogomes',
-      password: 'abc123'
+      password: '123456',
+      roles: ['restrito', 'admin']
     })
    await user.save()
+
+   const user2 = new User({
+    username: 'user2',
+    password: '123456',
+    roles: ['restrito']
+  })
+ await user2.save()
+   
    console.log('User Created')
   }else{
     console.log('User Created Skipped')
