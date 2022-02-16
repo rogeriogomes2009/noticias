@@ -5,6 +5,7 @@ const User = require('../models/user')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 router.use(passport.initialize())  
 router.use(passport.session())
@@ -53,6 +54,28 @@ passport.use(new FacebookStrategy({
   }
 }))
 
+//definindo estratégia com o Google
+
+passport.use( new GoogleStrategy ({
+  clientID: '1097781024630-mm3ps82ms2ra9dmd48ber7srvr3iqtj1.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: 'http://localhost:3000/google/callback',
+  }, async(accessToken, refreshToken, err, profile, done) => {
+  const userDB = await User.findOne({ googleId: profile.id })
+  if(!userDB){
+    const user = new User({
+      name: profile.displayName,
+      googleId: profile.id,
+      roles: ['restrito']
+    })
+    await user.save()
+    done(null, user)
+  }else{
+    done(null, userDB)
+  }
+
+}))
+
 router.use((req, res, next) => {
   if(req.isAuthenticated()){
     res.locals.user = req.user
@@ -93,5 +116,11 @@ router.get('/facebook/callback',
             (req, res) => {
               res.redirect('/')
             }
-            )
+)
+
+router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile']}))
+router.get('/google/callback', 
+            passport.authenticate('google', { failureRedirect: '/', successRedirect: '/'}),
+)
+
 module.exports = router
