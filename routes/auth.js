@@ -4,6 +4,7 @@ const User = require('../models/user')
 
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const FacebookStrategy = require('passport-facebook').Strategy
 
 router.use(passport.initialize())  
 router.use(passport.session())
@@ -30,6 +31,28 @@ passport.use(new LocalStrategy(async(username, password, done) => {
   }
 }))
 
+//Estrategia de acesso com Facebook
+
+passport.use(new FacebookStrategy({
+  clientID: '1067246713837347',
+  clientSecret: 'b0368011170384323981933e178cab9e',
+  callbackURL: 'http://localhost:3000/facebook/callback',
+  profileFilds: ['id', 'displayName', 'email', 'photos']
+}, async(accessToken, refreshToken, profile, done) => {
+  const userDB = await User.findOne({ facebookId: profile.id })
+  if(!userDB){
+    const user = new User({
+      name: profile.displayName,
+      facebookId: profile.id,
+      roles: ['restrito']
+    })
+    await user.save()
+    done(null, user)
+  }else{
+    done(null, userDB)
+  }
+}))
+
 router.use((req, res, next) => {
   if(req.isAuthenticated()){
     res.locals.user = req.user
@@ -44,7 +67,7 @@ router.use((req, res, next) => {
 router.get('/change-role/:role', (req, res) => {
   if(req.isAuthenticated()){
   if(req.user.roles.indexOf(req.params.role)>=0){
-    req.role = req.params.role
+    req.session.role = req.params.role
   }}
   res.redirect('/')
 })
@@ -64,5 +87,11 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: false
 }))
-
+router.get('/facebook', passport.authenticate('facebook'))
+router.get('/facebook/callback', 
+            passport.authenticate('facebook', { failureRedirect: '/'}),
+            (req, res) => {
+              res.redirect('/')
+            }
+            )
 module.exports = router

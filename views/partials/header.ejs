@@ -49,10 +49,10 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              <%= locals.user.username %>
+              <%= locals.user.username || locals.user.name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <% if(locals.user.roles.lenght>1) { %> 
+              <% if(locals.user.roles.length>1) { %> 
               <% Object.values(locals.user.roles).forEach ( role => { %>
                 <a class="dropdown-item" href="/change-role/<%= role %>"><%= role %></a>
               <% }) %>
@@ -67,11 +67,10 @@
             <% } %>
       </ul>
         <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
     </div>
   </nav>
 
   <div class="container">
-    <%= JSON.stringify(locals) %>
