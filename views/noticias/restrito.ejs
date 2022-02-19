@@ -1,15 +1,24 @@
 
 <%- include('../partials/header') %>
 
-<div class="starter-template">
-  <h1>Notícias Privadas</h1>
-  <table>
+<section id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+  <h2>Notícias Privadas</h2>
+  <p class="lead">Todas as Notícias Cadastradas</p>
+  <table class="table table-hover">
     <% noticias.forEach( noticia => { %>
     <tr>
-      <td><%= noticia.title %></td>
+      <td>
+        <a target="_blank" href="<%=noticia.content%>"><%= noticia.title %></a>
+        </td>
     </tr>
     <% }) %>
   </table>
 </div>
+</div>
+</div>
+</section>
 
 <%- include('../partials/footer') %>

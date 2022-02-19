@@ -53,7 +53,7 @@ const createInicialUser = async () => {
   }else{
     console.log('User Created Skipped')
   } 
-  const noticia = new Noticia ({
+  /*const noticia = new Noticia ({
     title: 'Notícia Pública'+new Date().getTime(),
     content: 'content',
     category: 'public'
@@ -65,7 +65,7 @@ const createInicialUser = async () => {
     content: 'content',
     category: 'private'
   })
-  await noticia2.save()
+  await noticia2.save()*/
 }
 
 mongoose

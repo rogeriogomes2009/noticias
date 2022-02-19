@@ -1,0 +1,26 @@
+<%- include ('../partials/header.ejs') %>
+
+   
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <form method="post">
+            <h2>Sobre a  Notícia <%= noticia.title %></h2>
+            <div class="form-group">
+              Deixe seu comentário abaixo:<br>
+            </div> 
+            <textarea class="form-control" name="comentario"></textarea>
+            <input type="submit" value="Adicionar Comentário">
+            <% noticia.comments.forEach( c => { %>
+             <div class="card">
+               <%= c %>
+             </div>
+              <% }) %> 
+          </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include ('../partials/footer.ejs') %>
