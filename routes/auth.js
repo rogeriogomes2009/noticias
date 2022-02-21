@@ -37,7 +37,7 @@ passport.use(new LocalStrategy(async(username, password, done) => {
 passport.use(new FacebookStrategy({
   clientID: '1067246713837347',
   clientSecret: 'b0368011170384323981933e178cab9e',
-  callbackURL: 'http://localhost:3000/facebook/callback',
+  callbackURL: 'http://localhost:3006/facebook/callback',
   profileFilds: ['id', 'displayName', 'email', 'photos']
 }, async(accessToken, refreshToken, profile, done) => {
   const userDB = await User.findOne({ facebookId: profile.id })
@@ -59,7 +59,7 @@ passport.use(new FacebookStrategy({
 passport.use( new GoogleStrategy ({
   clientID: '1097781024630-mm3ps82ms2ra9dmd48ber7srvr3iqtj1.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: 'http://localhost:3000/google/callback',
+  callbackURL: 'http://localhost:3006/google/callback',
   }, async(accessToken, refreshToken, err, profile, done) => {
   const userDB = await User.findOne({ googleId: profile.id })
   if(!userDB){
