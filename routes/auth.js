@@ -35,8 +35,8 @@ passport.use(new LocalStrategy(async(username, password, done) => {
 //Estrategia de acesso com Facebook
 
 passport.use(new FacebookStrategy({
-  clientID: '1067246713837347',
-  clientSecret: 'b0368011170384323981933e178cab9e',
+  clientID: '250481407275046',
+  clientSecret: '4aaa8a886f168cc77a0340d5dc603065',
   callbackURL: 'http://localhost:3006/facebook/callback',
   profileFilds: ['id', 'displayName', 'email', 'photos']
 }, async(accessToken, refreshToken, profile, done) => {
