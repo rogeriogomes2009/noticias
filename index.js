@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const port = process.env.PORT || 3000
-const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+//const mongoose = require('mongoose')
+//mongoose.Promise = global.Promise
 
 const User = require('./models/user')
 const Noticia = require('./models/noticia')
