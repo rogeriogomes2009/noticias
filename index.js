@@ -17,7 +17,7 @@ const admin = require('./routes/admin')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
-//const mongo = process.env.MONGODB || 'mongodb://localhost/noticias'
+const mongo = process.env.MONGODB || 'mongodb://localhost/noticias'
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
