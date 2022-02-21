@@ -59,7 +59,7 @@ passport.use(new FacebookStrategy({
 passport.use( new GoogleStrategy ({
   clientID: '1097781024630-mm3ps82ms2ra9dmd48ber7srvr3iqtj1.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: 'http://localhost:3006/google/callback',
+  callbackURL: 'https://noticias-nine.vercel.app/google/callback',
   }, async(accessToken, refreshToken, err, profile, done) => {
   const userDB = await User.findOne({ googleId: profile.id })
   if(!userDB){
