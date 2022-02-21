@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const port = process.env.PORT || 3000
-const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+//const mongoose = require('mongoose')
+//mongoose.Promise = global.Promise
 
 const User = require('./models/user')
 const Noticia = require('./models/noticia')
@@ -68,11 +68,11 @@ const createInicialUser = async () => {
   await noticia2.save()*/
 }
 
-mongoose
-  .connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    createInicialUser()
+//mongoose
+  //.connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
+  //.then(() => {
+    //createInicialUser()
     app.listen(port, () => console.log('Listening...'))
-  })
- .catch(e => console.log(e))
+  //})
+ //.catch(e => console.log(e))
 
