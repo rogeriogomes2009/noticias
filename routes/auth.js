@@ -37,7 +37,7 @@ passport.use(new LocalStrategy(async(username, password, done) => {
 passport.use(new FacebookStrategy({
   clientID: '250481407275046',
   clientSecret: '4aaa8a886f168cc77a0340d5dc603065',
-  callbackURL: 'https://noticias-nine.vercel.app/facebook/callback',
+  callbackURL: 'http://localhost:3006/facebook/callback',
   profileFilds: ['id', 'displayName', 'email', 'photos']
 }, async(accessToken, refreshToken, profile, done) => {
   const userDB = await User.findOne({ facebookId: profile.id })
