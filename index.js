@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 
 app.use(session({ secret: 'fullstack-master' }))
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(path.join(_dirname,'public')))
+app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/', auth)
 app.use('/', pages)
