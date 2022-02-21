@@ -17,7 +17,7 @@ const admin = require('./routes/admin')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
-const mongo = process.env.MONGODB || 'mongodb://localhost/noticias'
+//const mongo = process.env.MONGODB || 'mongodb://localhost/noticias'
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -68,11 +68,11 @@ const createInicialUser = async () => {
   await noticia2.save()*/
 }
 
-mongoose
-  .connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    createInicialUser()
+//mongoose
+  //.connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
+  //.then(() => {
+    //createInicialUser()
     app.listen(port, () => console.log('Listening...'))
-  })
-  .catch(e => console.log(e))
+ // })
+ // .catch(e => console.log(e))
 
