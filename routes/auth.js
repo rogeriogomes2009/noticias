@@ -42,7 +42,7 @@ passport.use(new FacebookStrategy({
 }, async(accessToken, refreshToken, profile, done) => {
   const userDB = await User.findOne({ facebookId: profile.id })
   if(!userDB){
-    const user = new User({
+     const user = new User({
       name: profile.displayName,
       facebookId: profile.id,
       roles: ['restrito']
