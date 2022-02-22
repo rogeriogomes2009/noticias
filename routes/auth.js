@@ -35,8 +35,8 @@ passport.use(new LocalStrategy(async(username, password, done) => {
 //Estrategia de acesso com Facebook
 
 passport.use(new FacebookStrategy({
-  clientID: '250481407275046',
-  clientSecret: '4aaa8a886f168cc77a0340d5dc603065',
+  clientID: '677208459975212',
+  clientSecret: '5d61824ab6f2f6824e4fb82c9a988ab4',
   callbackURL: 'https://noticias-nine.vercel.app/facebook/callback',
   profileFilds: ['id', 'displayName', 'email', 'photos']
 }, async(accessToken, refreshToken, profile, done) => {
