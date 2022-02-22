@@ -37,8 +37,8 @@ passport.use(new LocalStrategy(async(username, password, done) => {
 passport.use(new FacebookStrategy({
   clientID: '372415294709199',
   clientSecret: '446b597d4827dd8db9ccb52085d103d1',
-  callbackURL: 'https://noticias-nine.vercel.app/facebook/callback',
-  profileFilds: ['id', 'displayName', 'email', 'photos']
+  callbackURL: 'https://noticias-nine.vercel.app/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'email', 'photos']
 }, async(accessToken, refreshToken, profile, done) => {
   const userDB = await User.findOne({ facebookId: profile.id })
   if(!userDB){
@@ -110,8 +110,8 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: false
 }))
-router.get('/facebook', passport.authenticate('facebook'))
-router.get('/facebook/callback', 
+router.get('/auth/facebook', passport.authenticate('facebook'))
+router.get('/auth/facebook/callback', 
             passport.authenticate('facebook', { failureRedirect: '/'}),
             (req, res) => {
               res.redirect('/')
